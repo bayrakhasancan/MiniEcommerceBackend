@@ -1,6 +1,8 @@
-﻿namespace MiniEcommerce.Domain.Entities
+﻿using MiniEcommerce.Domain.ValueObjects;
+
+namespace MiniEcommerce.Application.Common.DTOs.Product
 {
-    public class Product : BaseAuditableEntity
+    public class  ProductDto
     {
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;

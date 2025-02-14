@@ -1,23 +1,16 @@
-﻿using MiniEcommerce.Domain.Common;
-using MiniEcommerce.Domain.Constants;
-using MiniEcommerce.Domain.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MiniEcommerce.Domain.ValueObjects
+﻿namespace MiniEcommerce.Domain.ValueObjects
 {
     public class Money : ValueObject
     {
-        public decimal Amount { get; }
-        public Currencies Currencies { get; }
+        public decimal Amount { get; init; }
+        public Currencies Currency { get; init; }
 
-        private Money(decimal amount, Currencies currency)
+        private Money() { } // EF Core'un kullanabileceği parametresiz constructor
+
+        public Money(decimal amount, Currencies currency)
         {
             Amount = amount;
-            Currencies = currency;
+            Currency = currency;
         }
 
         public static Money From(decimal amount, Currencies currency)
@@ -40,13 +33,13 @@ namespace MiniEcommerce.Domain.ValueObjects
 
         public override string ToString()
         {
-            return $"{Amount} {Currencies}";
+            return $"{Amount} {Currency}";
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Amount;
-            yield return Currencies;
+            yield return Currency;
         }
     }
 }
